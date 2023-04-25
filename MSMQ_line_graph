@@ -1,0 +1,10 @@
+index="perfmon" counter="Messages in Queue" Customer-555
+| timechart span=1m eval(round(avg(Value),0)) by instance
+| rename os:msmqServer03\private$\Customer-555_queues\asynchighthrottleservice.svc as "asyncHighThrottle (Outbound)"
+| rename os:msmqServer03\private$\Customer-555_queues\asynclocationsservice.svc as "asyncLocations (Outbound)"
+| rename os:msmqServer03\private$\Customer-555_queues\asynctaskservice.svc as "asyncTask (Outbound)"
+| rename os:msmqServer03\private$\Customer-555_queues\asyncaccountingservice.svc as "asyncAccounting (Outbound)"
+| rename msmqServer03\private$\Customer-555_queues\asyncaccountingservice.svc as "asyncAccounting (Private)"
+| rename msmqServer03\private$\Customer-555_queues\asynclocationsservice.svc as "asyncLocations (Private)"
+| rename msmqServer03\private$\Customer-555_queues\asynctaskservice.svc as "asyncTask (Private)"
+| rename msmqServer03\private$\Customer-555_queues\asynchighthrottleservice.svc as "asyncHighThrottle (Private)"
