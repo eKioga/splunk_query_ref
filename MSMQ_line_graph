@@ -1,5 +1,8 @@
 index="perfmon" counter="Messages in Queue" Customer-555
 | timechart span=1m eval(round(avg(Value),0)) by instance
+```this can dump a ton of queue info. I reccomend going through and renaming what is important```
+```that way your dashboard remains clean and easy for your devs to understand at a glance```
+```See the lines below for examples on differentiating between private and outbound queues```
 | rename os:msmqServer03\private$\Customer-555_queues\asynchighthrottleservice.svc as "asyncHighThrottle (Outbound)"
 | rename os:msmqServer03\private$\Customer-555_queues\asynclocationsservice.svc as "asyncLocations (Outbound)"
 | rename os:msmqServer03\private$\Customer-555_queues\asynctaskservice.svc as "asyncTask (Outbound)"
