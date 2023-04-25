@@ -1,3 +1,4 @@
+```Pull up the message queues that below to a specific customer```
 index="perfmon" counter="Messages in Queue" Customer-555
 | timechart span=1m eval(round(avg(Value),0)) by instance
 ```this can dump a ton of queue info. I reccomend going through and renaming what is important```
