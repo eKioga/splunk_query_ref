@@ -1,0 +1,7 @@
+index=perfmon host=* counter="% Committed Bytes In Use"
+earliest=-3m latest=now
+```I perfer to use min so I know for sure the host is over 90% before firing an alert```
+| stats min(Value) as minValue by host
+| eval minValue = round(minValue,2)
+| where minValue>90
+| rename minValue as "Lowest RAM % in last 3 minutes"
