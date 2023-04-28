@@ -1,0 +1,9 @@
+```I have this query setup as a report that runs at midnight and fires an email.```
+index=perfmon counter="% Processor Time"
+```line below defines business hours adjusted from when the report runs.```
+earliest=-17h latest=-8h
+| eval date_trunc=strftime(_time, "%m-%d-%Y")
+| stats avg(Value) as avg_cpu by date_trunc, host
+| eval avg_cpu = round(avg_cpu,2)
+| rename avg_cpu as "Average CPU %"
+| rename date_trunc as "Date"
