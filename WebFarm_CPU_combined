@@ -1,3 +1,0 @@
-index=perfmon counter="% Processor Time" host=WebServer1*
-```the web farm in this example is WebServer10 through WebServer19``
-| timechart span=1m eval(round(avg(Value),1)) by host
