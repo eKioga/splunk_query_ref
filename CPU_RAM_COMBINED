@@ -1,6 +1,0 @@
-```This query displays a linegraph showing the CPU and RAM data overlayed onto eachother.```
-```This technique shows a bigger picture of system performance while saving dashboard space```
-index=perfmon counter="% Processor Time" host=WebSRV04
-| timechart span=1m eval(round(avg(Value),1)) as CPU
-| appendcols [search index=perfmon counter="% Committed Bytes In Use" host=WebSRV04
-| timechart span=1m eval(round(avg(Value),1)) as Memory]
