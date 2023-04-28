@@ -1,0 +1,11 @@
+```Outbound```
+index="perfmon" counter="Messages in Queue" os:ServerMSMQ03 instance!="Computer Queues" NOT Customer-NoThanks instance!="os:msmqclus01\\private$\\core_repository_queues\\poisonorderservice.svc"
+| stats max(Value) As Messages by instance
+| head 10
+| sort - Messages
+
+```Inbound```
+index="perfmon" counter="Messages in Queue" NOT os:ServerMSMQ03 instance!="Computer Queues" NOT Customer-NoThanks instance!="os:msmqclus01\\private$\\core_repository_queues\\poisonorderservice.svc"
+| stats max(Value) As Messages by instance
+| head 10
+| sort - Messages
