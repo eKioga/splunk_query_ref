@@ -1,0 +1,9 @@
+```This alert checks the time stamps on the logs sent to splunk```
+```If the latest log sent from a host is greater than 5 minutes, it will throw an alert.```
+```This helps determine if a host is offline or if a splunk agent needs to be reset.```
+```If you need to take a host down, you might need to add "host!=ServerName01" to the line below until 24 hours has passed.```
+| tstats latest(_time) as latest where index=* earliest=-24h by host
+| eval recent = if(latest > relative_time(now(),"-5m"),1,0), realLatest = strftime(latest,"%c")
+| where recent=0
+| fields - latest
+| rename realLatest as "Timestamp of Last Log Sent"
