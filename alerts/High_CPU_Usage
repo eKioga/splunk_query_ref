@@ -1,0 +1,9 @@
+index=perfmon sourcetype="Perfmon:Processor Information(_Total)" counter="% Processor Time"
+earliest=-3m latest=now
+```I perfer the min value to be above 90% for 3 minutes. It helps me```
+```understand if a host is pegged at 100% or if it's still going```
+```between 90%-100%. Critial for determining the severity of the issue at a glance.```
+| stats min(Value) as minValue by host
+| eval minValue = round(minValue,2)
+| where minValue>90
+| rename minValue as "Lowest CPU % in last 3 minutes"
