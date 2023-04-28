@@ -1,0 +1,4 @@
+index=perfmon collection=CurrentConnections counter="Current Connections" instance=_Total host=webServer* OR host=WebServerFO*
+| stats latest(Value) as latestValue by host
+| where latestValue>400
+| rename latestValue as "Connections"
