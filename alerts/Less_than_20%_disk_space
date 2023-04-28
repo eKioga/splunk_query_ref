@@ -1,0 +1,10 @@
+index=perfmon counter="% Free Space" host=*
+| stats avg(Value) AS PctFree count by host, instance
+| fields - count
+| eval PctUsed = 100 - PctFree
+| eval PctUsed = 100 - round(PctFree,2)
+| eval PctFree = 100 - round(PctUsed,2)
+| rename instance as drive
+| rename PctFree as "% Free"
+| rename PctUsed as "% Used"
+| search "% Used" > 80
